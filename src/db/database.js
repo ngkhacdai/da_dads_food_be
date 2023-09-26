@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { db: { username, password, clustername , databasename } } = require('../configs/mongoose');
 const connectionString = `mongodb+srv://ngkhacdai1:CAt0FWhYMFPiKOhU@foodserver.yglwnzn.mongodb.net/foodapp`;
 
 class Database {
