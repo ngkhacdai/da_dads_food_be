@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
+const secretKey = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY5NTcwMzM5NSwiaWF0IjoxNjk1NzAzMzk1fQ.1dC3Cj3zSBmCbk6m4zJ0zUuO1ZySRXBAy9mggYpfAfs"
 
-const verifyToken  = () => {
+const verifyToken  = (req,res,next) => {
     const token = req.headers.token;
 
   if (!token) {
