@@ -12,8 +12,13 @@ var productSchema = mongoose.Schema(
             require: true,
             unique: true
         },
+        price: {
+            type: String,
+            require: true,
+            unique: true
+        },
         category  : {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
         },

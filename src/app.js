@@ -3,11 +3,16 @@ const app = express();
 const morgan = require('morgan');
 const { default: helmet } = require('helmet');
 const compression = require('compression');
+const cors = require('cors')
 require('dotenv').config();
 
 // init midleware
 app.use(morgan("dev"));
 app.use(helmet());
+app.use(cors());
+app.use('/uploads', express.static('uploads'));
+app.use(express.json())
+
 app.use(
     express.urlencoded({
         extended: true
