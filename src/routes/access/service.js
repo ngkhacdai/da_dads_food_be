@@ -1,5 +1,6 @@
 const userSchema = require('../../modules/user')
 const bcrypt = require('bcrypt');
+const productSchema = require('../../modules/product')
 const {createToken}  = require('../../auth/createToken')
 class service {
     static signup = async ({ username, email, password, address,phone }) => {
