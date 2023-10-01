@@ -4,6 +4,7 @@ const categorySchema = require('../../modules/categories')
 const bcrypt = require('bcrypt');
 const { createToken } = require('../../auth/createToken')
 const fs = require('fs')
+const path = require('path');
 class service {
     static login = async ({ email, password }) => {
         const checkEmail = await userSchema.findOne({ email: email }).lean();
@@ -25,7 +26,7 @@ class service {
         
     }
     static getAllProduct = async () => { 
-        const product = await productSchema.find();
+        const product = await productSchema.find().lean();
         return product;
     }
     static addProduct = async (req) => { 
@@ -65,9 +66,41 @@ class service {
             return 'Thêm danh mục sản phẩm thất bại'
         }
     }
-    static addCategory = async () => { 
+    static getAllCategory = async () => { 
         const categories = await categorySchema.find().lean();
         return categories;
+    }
+    static getProductByID = async (req) => { 
+        const product = await productSchema.findOne(req.body._id).lean();
+        return product;
+    }
+    static updateProduct = async (req) => { 
+        const { _id, name, description, price, category, image, stockQuantity } = req.body;
+        const ext = path.extname(req.file.originalname);
+        fs.rename(req.file.path, 'uploads/' +Date.now() + '-' + Math.round(Math.random() * 1e9)+ ext, (err) => {
+            if (err) { 
+                console.log(err);
+            }
+        })
+        const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
+        const updateroduct = await productSchema.findOneAndUpdate(_id,{
+            name,
+            description,
+            price,
+            category,
+            image: image_product,
+            stockQuantity
+        }
+        )
+        if (updateroduct) {
+            return 'Update sản phẩm thành công'
+        } else {
+            return 'Update sản phẩm thất bại'
+        }
+    }
+    static deleteProduct = async (req) => { 
+        const product = await productSchema.findOneAndDelete(req.body._id)
+        return 'delete product successfully'
     }
 }
 

@@ -6,6 +6,12 @@ router.post('/signup', controller.signup)
 
 router.post('/login', controller.login)
 
-router.get('/',verifyToken, controller.index);
+router.get('/', verifyToken, controller.index);
+
+router.get('/getallproduct', controller.getAllProduct)
+
+router.get('/getproductbyid', controller.getProductByID)
+
+
 
 module.exports = router;

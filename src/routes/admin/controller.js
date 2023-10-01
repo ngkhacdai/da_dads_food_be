@@ -14,8 +14,17 @@ class controller {
     addCategory = async (req, res, next) => {
         res.send(await service.addCategory(req.body))
     }
-    getCategory = async (req, res, next) => { 
-        res.send(await service.getCategory())
+    getAllCategory = async (req, res, next) => { 
+        res.send(await service.getAllCategory())
+    }
+    getProductByID = async (req, res, next) => { 
+        res.send(await service.getProductByID(req))
+    }
+    updateProduct = async (req, res, next) => { 
+        res.send(await service.updateProduct(req))
+    }
+    deleteProduct = async (req, res, next) => { 
+        res.send(await service.deleteProduct(req))
     }
 }
 

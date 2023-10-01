@@ -32,6 +32,14 @@ class service {
             token
         }
     }
+    static getAllProduct = async () => { 
+        const product = await productSchema.find().lean();
+        return product;
+    }
+    static getProductByID = async (req) => { 
+        const product = await productSchema.findOne(req.body._id).lean();
+        return product;
+    }
 }
 
 module.exports =  service;

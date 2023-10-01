@@ -10,6 +10,12 @@ class controller {
     index = async (req, res, next) => { 
         res.send('ádjkghahdga')
     }
+    getAllProduct = async (req, res, next) => {
+        res.send(await service.getAllProduct())
+    }
+    getProductByID = async (req, res, next) => { 
+        res.send(await service.getProductByID(req))
+    }
 }
 
 module.exports = new controller;
