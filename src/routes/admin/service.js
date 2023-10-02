@@ -36,12 +36,13 @@ class service {
             console.error('Image object or path is missing.');
             return 'Thêm sản phẩm thất bại';
         } 
-        fs.rename(req.file.path, 'uploads/' +Date.now() + '-' + Math.round(Math.random() * 1e9)+ ext, (err) => {
+        const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
+        fs.rename(req.file.path, 'uploads/' +image_product, (err) => {
             if (err) { 
                 console.log(err);
             }
         })
-        const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
+        
         const newProduct = await productSchema.create({
             name,
             description,
@@ -78,12 +79,13 @@ class service {
     static updateProduct = async (req) => { 
         const { _id, name, description, price, category, image, stockQuantity } = req.body;
         const ext = path.extname(req.file.originalname);
-        fs.rename(req.file.path, 'uploads/' +Date.now() + '-' + Math.round(Math.random() * 1e9)+ ext, (err) => {
+        const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
+        fs.rename(req.file.path, 'uploads/' +image_product, (err) => {
             if (err) { 
                 console.log(err);
             }
         })
-        const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
+        
         const updateroduct = await productSchema.findOneAndUpdate(_id,{
             name,
             description,
