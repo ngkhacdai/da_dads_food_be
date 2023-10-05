@@ -8,13 +8,13 @@ const path = require('path');
 class service {
     static login = async ({ email, password }) => {
         const checkEmail = await userSchema.findOne({ email: email }).lean();
-        if (!checkEmail) return { message: 'Tài khoản không tồn tại' }
+        if (!checkEmail) return {status: 401, message: 'Tài khoản không tồn tại' }
         const match = await bcrypt.compare(password, checkEmail.password).lean();
         if (!match) {
-            return { message: 'Sai mật khẩu' }
+            return {status: 401, message: 'Sai mật khẩu' }
         } else {
             if (checkEmail.role == 'user') {
-                return { message: 'Bạn không có quyền truy cập' }
+                return { status: 403,message: 'Bạn không có quyền truy cập' }
             } 
             const token = await createToken(checkEmail._id, checkEmail.username,checkEmail.role)
             return {
@@ -34,7 +34,7 @@ class service {
         const ext = path.extname(req.file.originalname);
         if (!req.file.path) {
             console.error('Image object or path is missing.');
-            return 'Thêm sản phẩm thất bại';
+            return {status: 500,message: 'Image object or path is missing.'};
         } 
         const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
         fs.rename(req.file.path, 'uploads/' +image_product, (err) => {
@@ -53,9 +53,9 @@ class service {
         }
         )
         if (newProduct) {
-            return 'Thêm sản phẩm thành công'
+            return {status: 200,message: 'Thêm sản phẩm thành công'}
         } else {
-            return 'Thêm sản phẩm thất bại'
+            return {status: 500,message: 'Thêm sản phẩm thất bại'}
         }
     }
     static addCategory = async (name) => {
@@ -63,9 +63,9 @@ class service {
             name
         )
         if (newCategory) {
-            return 'Thêm danh mục sản phẩm thành công'
+            return  {status: 200,message: 'Thêm danh mục sản phẩm thành công'} 
         } else {
-            return 'Thêm danh mục sản phẩm thất bại'
+            return  {status: 500,message: 'Thêm danh mục sản phẩm thất bại'} 
         }
     }
     static getAllCategory = async () => { 
@@ -96,9 +96,9 @@ class service {
         }
         )
         if (updateroduct) {
-            return 'Update sản phẩm thành công'
+            return {status: 200,message: 'Update sản phẩm thành công'}  
         } else {
-            return 'Update sản phẩm thất bại'
+            return {status: 500,message: 'Update sản phẩm thất bại'}   
         }
     }
     static deleteProduct = async (req) => { 

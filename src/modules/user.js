@@ -5,7 +5,6 @@ var userSchema = mongoose.Schema(
         username: {
             type: String,
             require: true,
-            unique: true,
         },
         email: {
             type: String,
@@ -16,12 +15,10 @@ var userSchema = mongoose.Schema(
         password: {
         type: String,
         required: true,
-        unique: true,
         },
         address: {
             type: String,
             require: true,
-            unique: true
         },
         phone: {
             type: Number,

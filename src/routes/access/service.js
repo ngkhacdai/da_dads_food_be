@@ -5,7 +5,7 @@ const {createToken}  = require('../../auth/createToken')
 class service {
     static signup = async ({ username, email, password, address,phone }) => {
         const checkEmail = await userSchema.findOne({ email: email });
-        if (checkEmail) return { message: 'Tài khoản đã tồn tại' }
+        if (checkEmail) return { status: 401, message: 'Tài khoản đã tồn tại' }
         console.log(checkEmail);
         const passwordHash = await bcrypt.hash(password, 10);
         const newUser = await userSchema.create({
@@ -23,9 +23,9 @@ class service {
     }
     static login = async ({ email, password }) => {
         const checkEmail = await userSchema.findOne({ email: email });
-        if (!checkEmail) return { message: 'Tài khoản không tồn tại' }
+        if (!checkEmail) return {  status: 401,message: 'Tài khoản không tồn tại' }
         const match = await bcrypt.compare(password, checkEmail.password);
-        if (!match) return { message: 'Sai mật khẩu' }
+        if (!match) return {status: 401 , message: 'Sai mật khẩu' }
         const token = await createToken(checkEmail._id, checkEmail.username,checkEmail.role)
         return {
             message: 'Đăng nhập thành công !!!',
