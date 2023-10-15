@@ -19,8 +19,8 @@ var productSchema = mongoose.Schema(
         required: true,
         },
         image : {
-            type: String,
-            require: true,
+            data: Buffer,
+            contentType: String,
         },
         stockQuantity : {
             type: Number,

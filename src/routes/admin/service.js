@@ -30,25 +30,31 @@ class service {
         return product;
     }
     static addProduct = async (req) => { 
-        const { name, description, price, category, image, stockQuantity } = req.body;
+        const { name, description, price, category, stockQuantity } = req.body;
         const ext = path.extname(req.file.originalname);
         if (!req.file.path) {
             console.error('Image object or path is missing.');
             return {status: 500,message: 'Image object or path is missing.'};
         } 
+        var img = fs.readFileSync(req.file.path);
+        var encode_img = img.toString('base64');
+        const imageType = req.file.mimetype;
         const image_product = Date.now() + '-' + Math.round(Math.random() * 1e9) + ext;
         fs.rename(req.file.path, 'uploads/' +image_product, (err) => {
             if (err) { 
                 console.log(err);
             }
         })
-        
+        const newImage = {
+            data: encode_img,
+            contentType: imageType,
+        };
         const newProduct = await productSchema.create({
             name,
             description,
             price,
             category,
-            image: image_product,
+            image: newImage,
             stockQuantity
         }
         )
