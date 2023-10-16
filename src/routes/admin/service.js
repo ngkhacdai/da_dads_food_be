@@ -108,8 +108,17 @@ class service {
         }
     }
     static deleteProduct = async (req) => { 
-        const product = await productSchema.findOneAndDelete(req.body._id)
-        return 'delete product successfully'
+        await productSchema.findOneAndDelete(req.body._id);
+        const product = await productSchema.find().lean();
+        return {
+            message: 'delete product successfully',
+            status: 200,
+            product
+        }
+    }
+    static getAllUser = async (req) => { 
+        const user = await userSchema.find().lean();
+        return user;
     }
 }
 

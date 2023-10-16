@@ -22,4 +22,6 @@ router.put('/updateproduct',upload.single('image'), checkAdminRole, controller.u
 
 router.delete('/deleteproduct',checkAdminRole,controller.deleteProduct)
 
+router.get('/getalluser',checkAdminRole,controller.getAllUser)
+
 module.exports = router;

@@ -26,6 +26,9 @@ class controller {
     deleteProduct = async (req, res, next) => { 
         res.send(await service.deleteProduct(req))
     }
+    getAllUser = async (req, res, next) => { 
+        res.send(await service.getAllUser(req))
+    }
 }
 
 module.exports = new controller;
