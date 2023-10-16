@@ -9,7 +9,7 @@ class service {
     static login = async ({ email, password }) => {
         const checkEmail = await userSchema.findOne({ email: email }).lean();
         if (!checkEmail) return {status: 401, message: 'Tài khoản không tồn tại' }
-        const match = await bcrypt.compare(password, checkEmail.password).lean();
+        const match = await bcrypt.compare(password, checkEmail.password);
         if (!match) {
             return {status: 401, message: 'Sai mật khẩu' }
         } else {
