@@ -20,7 +20,7 @@ router.get('/getproductbyid', checkAdminRole, controller.getProductByID)
 
 router.put('/updateproduct',upload.single('image'), checkAdminRole, controller.updateProduct)
 
-router.delete('/deleteproduct',checkAdminRole,controller.deleteProduct)
+router.post('/deleteproduct',checkAdminRole,controller.deleteProduct)
 
 router.get('/getalluser',checkAdminRole,controller.getAllUser)
 
