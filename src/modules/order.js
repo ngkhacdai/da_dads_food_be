@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var orderSchema = mongoose.Schema(
     {
         user  : {
-            type: ObjectId,
+            type: mongoose.Schema.ObjectId,
             require: true,
             unique: true,
         },
