@@ -31,11 +31,11 @@ class service {
     }
     static addProduct = async (req) => { 
         const { name, description, price, category, stockQuantity } = req.body;
-        const ext = path.extname(req.file.originalname);
         if (!req.file.path) {
             console.error('Image object or path is missing.');
             return {status: 500,message: 'Image object or path is missing.'};
         } 
+        const ext = path.extname(req.file.originalname);
         var img = fs.readFileSync(req.file.path);
         var encode_img = img.toString('base64');
         const imageType = req.file.mimetype;
@@ -84,11 +84,11 @@ class service {
     }
     static updateProduct = async (req) => { 
         const { _id, name, description, price, category, image, stockQuantity } = req.body;
-        const ext = path.extname(req.file.originalname);
-        if (!req.file.path) {
+        if (!req.file) {
             console.error('Image object or path is missing.');
             return {status: 500,message: 'Image object or path is missing.'};
         } 
+        const ext = path.extname(req.file.originalname);
         var img = fs.readFileSync(req.file.path);
         var encode_img = img.toString('base64');
         const imageType = req.file.mimetype;
@@ -103,7 +103,7 @@ class service {
             contentType: imageType,
         };
         
-        const updateroduct = await productSchema.findOneAndUpdate(_id,{
+        const updateroduct = await productSchema.findOneAndUpdate({_id: _id},{
             name,
             description,
             price,
