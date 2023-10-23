@@ -3,29 +3,26 @@ const mongoose = require('mongoose');
 var orderSchema = mongoose.Schema(
     {
         user  : {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user',
             require: true,
-            unique: true,
         },
         products  : {
             type: Array,
             require: true,
-            unique: true
         },
         totalPrice   : {
         type: Number,
         required: true,
-        unique: true,
         },
         status  : {
             type: String,
             require: true,
-            unique: true
         },
         orderDate  : {
-            type: Date,
-            unique: true,
-            require: true
+            type: String,
+            require: true,
+            default: new Date().toISOString().split('T')[0],
         }
     }
 )

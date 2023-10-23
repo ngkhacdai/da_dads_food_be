@@ -1,6 +1,7 @@
 const userSchema = require('../../modules/user')
 const productSchema = require('../../modules/product')
 const categorySchema = require('../../modules/categories')
+const orderSchema = require('../../modules/order')
 const bcrypt = require('bcrypt');
 const { createToken } = require('../../auth/createToken')
 const fs = require('fs')
@@ -130,6 +131,10 @@ class service {
     static getAllUser = async (req) => { 
         const user = await userSchema.find().lean();
         return user;
+    }
+    static getAllOrder = async (req) => { 
+        const orders = await orderSchema.find().populate('user');
+        return orders;
     }
 }
 

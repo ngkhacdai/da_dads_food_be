@@ -47,7 +47,7 @@ class service {
         const newOrder = await orderSchema.create({
             user: userID,
             products: [
-                {product: _id, quantity: quantity, price: price}
+                {product: _id, quantity: quantity, price: Number(price)}
             ],
             totalPrice: quantity * price,
             status: 'Chờ xác nhận'

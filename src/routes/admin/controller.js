@@ -29,6 +29,9 @@ class controller {
     getAllUser = async (req, res, next) => { 
         res.send(await service.getAllUser(req))
     }
+    getAllOrder = async (req, res, next) => { 
+        res.send(await service.getAllOrder(req))
+    }
 }
 
 module.exports = new controller;
