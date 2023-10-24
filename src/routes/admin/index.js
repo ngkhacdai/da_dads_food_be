@@ -16,6 +16,8 @@ router.get('/getcategory',checkAdminRole,controller.getAllCategory)
 
 router.post('/addcategory', checkAdminRole, controller.addCategory)
 
+router.post('/removecategory', checkAdminRole, controller.removeCategory)
+
 router.get('/getproductbyid', checkAdminRole, controller.getProductByID)
 
 router.put('/updateproduct',upload.single('image'), checkAdminRole, controller.updateProduct)

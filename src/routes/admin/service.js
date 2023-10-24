@@ -83,6 +83,12 @@ class service {
         const product = await productSchema.findOne(req.body._id).lean();
         return product;
     }
+    static removeCategory = async ({_id}) => { 
+        const category = await categorySchema.findOneAndDelete({ _id: _id });
+        return {
+            message: 'Xóa danh mục thành công'
+        }
+    }
     static updateProduct = async (req) => { 
         const { _id, name, description, price, category, image, stockQuantity } = req.body;
         if (!req.file) {

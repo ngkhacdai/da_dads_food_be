@@ -29,11 +29,11 @@ const checkAdminRole = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: 'Invalid token' });
     }
-
+    console.log(decoded);
     if (decoded.role !== 'admin') {
       return res.status(403).json({ message: 'You do not have permission to access this resource' });
     }
-
+    
     next();
   });
 }

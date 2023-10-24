@@ -32,6 +32,11 @@ class controller {
     getAllOrder = async (req, res, next) => { 
         res.send(await service.getAllOrder(req))
     }
+    removeCategory = async (req, res, next) => { 
+        res.send(await service.removeCategory(
+            {_id: req.body._id}
+        ))
+    }
 }
 
 module.exports = new controller;
