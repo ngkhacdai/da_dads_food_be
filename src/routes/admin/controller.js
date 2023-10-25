@@ -37,6 +37,12 @@ class controller {
             {_id: req.body._id}
         ))
     }
+    getHome = async (req, res, next) => { 
+        res.send(await service.getHome())
+    }
+    getOrderDetail = async (req, res, next) => {
+        res.send(await service.getOrderDetail({_id: req.body._id}))
+    }
 }
 
 module.exports = new controller;

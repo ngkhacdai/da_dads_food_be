@@ -142,6 +142,23 @@ class service {
         const orders = await orderSchema.find().populate('user');
         return orders;
     }
+    static getHome = async (req) => { 
+        const countUser = await userSchema.count();
+        const countProduct = await productSchema.count();
+        const countOrder = await orderSchema.count();
+        const product = await productSchema.find().sort({ soldQuantity: -1 }).lean();
+        return {
+            countUser,countProduct,countOrder,product
+        }
+    }
+    static getOrderDetail = async ({_id}) => { 
+        const orderDetail = await orderSchema.findOne({_id: _id}).populate({
+            path: 'products.product',
+            model: 'product',
+        })
+        if (!orderDetail) return { message: 'Order not found' }
+        return orderDetail
+    }
 }
 
 module.exports =  service;

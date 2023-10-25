@@ -43,7 +43,13 @@ class service {
         const product = await productSchema.findOne(req.body._id).lean();
         return product;
     }
-    static payOneProduct = async ( {userID, _id, quantity, price }) => { 
+    static payOneProduct = async ({ userID, _id, quantity, price }) => { 
+        const product = await productSchema.findOne({ _id: _id });
+        if(!product) return {message: "Product not found"}
+        const newStockQuantity = product.stockQuantity - quantity;
+        const updateOneProduct = await productSchema.findOneAndUpdate({ _id: _id }, {
+            $set: {soldQuantity: quantity,stockQuantity: newStockQuantity}
+        })
         const newOrder = await orderSchema.create({
             user: userID,
             products: [

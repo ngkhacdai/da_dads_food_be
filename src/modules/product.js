@@ -25,6 +25,11 @@ var productSchema = mongoose.Schema(
         stockQuantity : {
             type: Number,
             require: true
+        },
+        soldQuantity: {
+            type: Number,
+            default: 0,
+            require: true
         }
     }
 )

@@ -26,6 +26,10 @@ router.post('/deleteproduct',checkAdminRole,controller.deleteProduct)
 
 router.get('/getallorder',checkAdminRole,controller.getAllOrder)
 
-router.get('/getalluser',checkAdminRole,controller.getAllUser)
+router.get('/getalluser', checkAdminRole, controller.getAllUser)
+
+router.get('/home', checkAdminRole, controller.getHome)
+
+router.get('/getorderdetail',checkAdminRole, controller.getOrderDetail)
 
 module.exports = router;
