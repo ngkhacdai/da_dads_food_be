@@ -30,6 +30,6 @@ router.get('/getalluser', checkAdminRole, controller.getAllUser)
 
 router.get('/home', checkAdminRole, controller.getHome)
 
-router.get('/getorderdetail',checkAdminRole, controller.getOrderDetail)
+router.post('/getorderdetail',checkAdminRole, controller.getOrderDetail)
 
 module.exports = router;
