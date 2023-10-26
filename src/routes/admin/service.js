@@ -152,11 +152,31 @@ class service {
         }
     }
     static getOrderDetail = async ({_id}) => { 
-        const orderDetail = await orderSchema.findOne({_id: _id}).populate({
+        const orderDetail = await orderSchema.findOne({_id: _id}).populate('user').populate({
             path: 'products.product',
             model: 'product',
         })
         if (!orderDetail) return { message: 'Order not found' }
+        return orderDetail
+    }
+    static giaoHang = async ({ _id }) => {
+        const orderDetail = await orderSchema.findOneAndUpdate({ _id: _id }, {
+            $set: {
+            status: 'Đơn hàng đang được giao'
+        }}).populate('user').populate({
+            path: 'products.product',
+            model: 'product',
+        })
+        return orderDetail
+    }
+    static huyDonHang = async ({ _id }) => {
+        const orderDetail = await orderSchema.findOneAndUpdate({ _id: _id }, {
+            $set: {
+            status: 'Đơn hàng đã bị hủy'
+        }}).populate('user').populate({
+            path: 'products.product',
+            model: 'product',
+        })
         return orderDetail
     }
 }

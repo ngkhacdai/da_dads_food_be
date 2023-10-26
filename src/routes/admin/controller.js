@@ -43,6 +43,12 @@ class controller {
     getOrderDetail = async (req, res, next) => {
         res.send(await service.getOrderDetail({_id: req.body._id}))
     }
+    giaoHang = async (req, res, next) => {
+        res.send(await service.giaoHang({_id: req.body._id}))
+    }
+    huyDonHang = async (req, res, next) => {
+        res.send(await service.huyDonHang({_id: req.body._id}))
+    }
 }
 
 module.exports = new controller;

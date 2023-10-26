@@ -30,6 +30,10 @@ router.get('/getalluser', checkAdminRole, controller.getAllUser)
 
 router.get('/home', checkAdminRole, controller.getHome)
 
-router.post('/getorderdetail',checkAdminRole, controller.getOrderDetail)
+router.post('/getorderdetail', checkAdminRole, controller.getOrderDetail)
+
+router.post('/giaohang', checkAdminRole, controller.giaoHang)
+
+router.post('/huydonhang', checkAdminRole, controller.huyDonHang)
 
 module.exports = router;
