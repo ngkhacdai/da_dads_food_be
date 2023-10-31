@@ -77,9 +77,8 @@ class service {
         const order = await orderSchema.find({ orderID: orderID }).populate({
             path: 'products.product',
             model: 'product',
-        })
+        }).populate('user')
         if (!order) return { message: 'Không tìm thấy đơn hàng' }
-        
         return {
             order
         }
