@@ -67,14 +67,14 @@ class service {
         }
     }
     static getAllOrderByUser = async ({ userID }) => {
-        const order = await orderSchema.find({ user: userID })
+        const order = await orderSchema.find({ user: userID }).sort({"orderDate": -1})
         if (!order) return { message: 'Không có đơn hàng nào' }
         return {
             order
         }
     }
     static getOrderDetail = async ({ orderID }) => {
-        const order = await orderSchema.find({ orderID: orderID }).populate({
+        const order = await orderSchema.findOne({ _id: orderID }).populate({
             path: 'products.product',
             model: 'product',
         }).populate('user')
