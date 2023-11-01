@@ -46,6 +46,30 @@ class controller {
             ...req.body
         }))
     }
+    increaseQuantity = async (req, res, next) => { 
+        res.send(await service.increaseQuantity({
+            userID: req.user._id,
+            ...req.body
+        }))
+    }
+    decreaseQuantity = async (req, res, next) => { 
+        res.send(await service.decreaseQuantity({
+            userID: req.user._id,
+            ...req.body
+        }))
+    }
+    huyDonHang = async (req, res, next) => {
+        res.send(await service.huyDonHang({_id: req.body._id}))
+    }
+    nhanHang = async (req, res, next) => {
+        res.send(await service.nhanHang({_id: req.body._id}))
+    }
+    getItemInCart = async (req, res, next) => {
+        res.send(await service.getItemInCart({
+            userId: req.user._id,
+        }))
+    }
+    
 }
 
 module.exports = new controller;

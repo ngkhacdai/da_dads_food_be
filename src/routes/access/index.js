@@ -18,6 +18,17 @@ router.post('/getorderdetail', verifyToken, controller.getOrderDetail)
 
 router.post('/addtocart', verifyToken, controller.addToCart)
 
+router.get('/getitemincart', verifyToken, controller.getItemInCart)
+
 router.post('/removefromcart', verifyToken, controller.removeFromCart)
+
+router.post('/increasequantity', verifyToken, controller.increaseQuantity)
+
+router.post('/decreasequantity', verifyToken, controller.decreaseQuantity)
+
+router.post('/huydonhang', verifyToken, controller.huyDonHang)
+
+router.post('/nhanhang', verifyToken, controller.nhanHang)
+
 
 module.exports = router;
