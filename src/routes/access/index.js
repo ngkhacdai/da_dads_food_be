@@ -26,6 +26,8 @@ router.post('/increasequantity', verifyToken, controller.increaseQuantity)
 
 router.post('/decreasequantity', verifyToken, controller.decreaseQuantity)
 
+router.get('/payincart',verifyToken,controller.payInCart)
+
 router.post('/huydonhang', verifyToken, controller.huyDonHang)
 
 router.post('/nhanhang', verifyToken, controller.nhanHang)

@@ -58,6 +58,11 @@ class controller {
             ...req.body
         }))
     }
+    payInCart = async (req, res, next) => {
+        res.send(await service.payInCart({
+            userId: req.user._id,
+        }))
+    }
     huyDonHang = async (req, res, next) => {
         res.send(await service.huyDonHang({_id: req.body._id}))
     }

@@ -18,6 +18,7 @@ var orderSchema = mongoose.Schema(
         status  : {
             type: String,
             require: true,
+            default: 'Chờ xác nhận'
         },
         orderDate  : {
             type: String,

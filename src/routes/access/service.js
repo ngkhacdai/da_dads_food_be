@@ -154,6 +154,23 @@ class service {
             message: 'Tăng số lượng sản phẩm thành công',
         }
     } 
+    static payInCart = async ({ userId }) => {
+        const cart = await cartSchema.findOne({ user: userId })
+        const newOrder = await orderSchema.create({
+            user: userId,
+            products: cart.items,
+            totalPrice: cart.total,
+        })
+        await cartSchema.findOneAndUpdate({ user: userId }, {
+            $set: {
+                items: [],
+                total: 0
+            }
+        })
+        return {
+            message: 'Đặt hành thành công'
+        }
+    }
     static huyDonHang = async ({ _id }) => {
         const orderDetail = await orderSchema.findOneAndUpdate({ _id: _id }, {
             $set: {
