@@ -32,5 +32,7 @@ router.post('/huydonhang', verifyToken, controller.huyDonHang)
 
 router.post('/nhanhang', verifyToken, controller.nhanHang)
 
+router.get('/getallblog',verifyToken,controller.getAllBlog)
+
 
 module.exports = router;

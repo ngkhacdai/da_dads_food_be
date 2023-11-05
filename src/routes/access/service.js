@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const productSchema = require('../../modules/product')
 const orderSchema = require('../../modules/order')
 const cartSchema = require('../../modules/cart')
-const {createToken}  = require('../../auth/createToken')
+const { createToken } = require('../../auth/createToken')
+const blogSchema = require('../../modules/blogpost')
 class service {
     static signup = async ({ username, email, password, address,phone }) => {
         const checkEmail = await userSchema.findOne({ email: email });
@@ -214,6 +215,12 @@ class service {
             return newcart
         }
         return cart
+    }
+    static getAllBlog = async () => {
+        const blog = await blogSchema.find().lean()
+        return {
+            blog
+        }
     }
 }
 

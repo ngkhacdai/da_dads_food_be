@@ -74,7 +74,9 @@ class controller {
             userId: req.user._id,
         }))
     }
-    
+    getAllBlog = async (req, res, next) => {
+        res.send(await service.getAllBlog());
+    }
 }
 
 module.exports = new controller;
