@@ -49,6 +49,20 @@ class controller {
     huyDonHang = async (req, res, next) => {
         res.send(await service.huyDonHang({_id: req.body._id}))
     }
+    thongKe = async (req, res, next) => {
+        res.send(await service.thongKe({
+            year: req.body.year,
+        }));
+    }
+    createBlog = async (req, res, next) => {
+        res.send(await service.createBlog({
+            userId: req.user,
+            ...req.body
+        }));
+    }
+    getAllBlog = async (req, res, next) => {
+        res.send(await service.getAllBlog());
+    }
 }
 
 module.exports = new controller;

@@ -10,18 +10,16 @@ var blogpostSchema = mongoose.Schema(
             type: String,
             require: true,
         },
-        author    : {
+        author : {
         type: String,
         required: true,
         },
         createdAt   : {
-            type: Date,
+            type: String,
             require: true,
+            default: new Date().toISOString().split('T')[0],
         },
-        tags   : {
-            type: Array,
-            require: true
-        }
+
     }
 )
 module.exports = mongoose.model('blogpost',blogpostSchema)

@@ -156,11 +156,21 @@ class service {
     } 
     static payInCart = async ({ userId }) => {
         const cart = await cartSchema.findOne({ user: userId })
-        const newOrder = await orderSchema.create({
+        await orderSchema.create({
             user: userId,
             products: cart.items,
             totalPrice: cart.total,
         })
+        const productsToUpdate = cart.items.map(item => {
+            return {
+                updateOne: {
+                    filter: { _id: item.product },
+                    update: { $inc: { stockQuantity: -item.quantity, soldQuantity: item.quantity } }
+                }
+            };
+        });
+
+        await productSchema.bulkWrite(productsToUpdate);
         await cartSchema.findOneAndUpdate({ user: userId }, {
             $set: {
                 items: [],

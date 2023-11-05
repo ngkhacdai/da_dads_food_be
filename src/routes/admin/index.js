@@ -36,4 +36,10 @@ router.post('/giaohang', checkAdminRole, controller.giaoHang)
 
 router.post('/huydonhang', checkAdminRole, controller.huyDonHang)
 
+router.post('/thongke',checkAdminRole,controller.thongKe)
+
+router.post('/createblog', checkAdminRole, controller.createBlog)
+
+router.get('/getallblog',checkAdminRole,controller.getAllBlog)
+
 module.exports = router;

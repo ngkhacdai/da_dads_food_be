@@ -2,6 +2,7 @@ const userSchema = require('../../modules/user')
 const productSchema = require('../../modules/product')
 const categorySchema = require('../../modules/categories')
 const orderSchema = require('../../modules/order')
+const blogSchema = require('../../modules/blogpost')
 const bcrypt = require('bcrypt');
 const { createToken } = require('../../auth/createToken')
 const fs = require('fs')
@@ -147,8 +148,13 @@ class service {
         const countProduct = await productSchema.count();
         const countOrder = await orderSchema.count();
         const product = await productSchema.find().sort({ soldQuantity: -1 }).lean();
+        let total = 0;
+        const order = await orderSchema.find()
+        await order.map((item) => {
+            total+= Number(item.totalPrice)
+        })
         return {
-            countUser,countProduct,countOrder,product
+            countUser,countProduct,countOrder,product,total
         }
     }
     static getOrderDetail = async ({_id}) => { 
@@ -178,6 +184,32 @@ class service {
             model: 'product',
         })
         return orderDetail
+    }
+    static thongKe = async ({ year }) => {
+        const order = await orderSchema.find().lean()
+        const orderDate = order.filter((item) => year === Number(new Date(item.orderDate).getFullYear()))
+        let total = 0
+        await orderDate.map((item) => {
+            total+=item.totalPrice
+        })
+        const orderCount = orderDate.length
+        return {total , orderCount}
+    }
+    static createBlog = async ({ userId, title, content }) => {
+        const blog = await blogSchema.create({
+            title,content,author: userId.name,
+        })
+        if (!blog) return { message: 'Tạo blog thất bại' }
+        return {
+            message: 'Tạo blog thành công',
+            blog
+        }
+    }
+    static getAllBlog = async () => {
+        const blog = await blogSchema.find().lean()
+        return {
+            blog
+        }
     }
 }
 
